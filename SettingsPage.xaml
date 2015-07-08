@@ -1,0 +1,59 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:es="clr-namespace:Microsoft.Expression.Shapes;assembly=Microsoft.Expression.Drawing" 
+    x:Class="Auto_finder.SettingsPage"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent" Loaded="LayoutRoot_Loaded">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="АВТО ПОИСК" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="настройки" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <ScrollViewer>
+                <StackPanel>
+                    <Grid>
+                        <TextBlock TextWrapping="Wrap" Height="72" HorizontalAlignment="Left" Margin="12,30,0,0" x:Name="textBlock1" Text="Разрешить приложению доступ к моему положению" VerticalAlignment="Top" Width="342" FontSize="24" />
+                        <ToggleButton Content="Да" Margin="0,25,19,0" VerticalAlignment="Top" Height="81" HorizontalAlignment="Right" Width="89" IsChecked="True" Name="GPSonButton"  />
+                    </Grid>
+                    <Button Content="Купить приложение" Height="72" Name="buyButton" Width="310" Click="buyButton_Click" />
+                    <Button Content="Оценить приложение" Height="72" Name="rateButton" Width="320" Click="rateButton_Click" />
+                    <Button Content="Поделиться" Height="72" Name="shareButton" Width="200" Click="shareButton_Click" />
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Left" Margin="12,30,36,8" FontSize="18.667"><Run Text="Приложение требует использования GPS для отслеживания и вывода на экран местоположения цели и Вас относительно нее. Вы можете в любой момент отказаться от этой возможности на этой странице. Мы не храним и не передаем третьим лицам данные о Вашем метонахождении."/><LineBreak/><Run/><LineBreak/><Run Text="Для того, чтобы использовать программу достаточно дождаться соединения со "/><LineBreak/><Run Text="спутником и нажать кнопку &quot;отметить&quot; на главном экране.  Чтобы найти, отмеченную цель следуйте по указателю."/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run Text="Поддержка: "/><Run Text="tatarshaov@gmail.com"/><LineBreak/><Run Text="Использованы элементы дизайна Andrew "/><LineBreak/><Run Text="Cameron, c thenounproject"/></TextBlock>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+ 
+    <!--Sample code showing usage of ApplicationBar-->
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+</phone:PhoneApplicationPage>

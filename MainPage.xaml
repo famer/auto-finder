@@ -1,0 +1,188 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Auto_finder.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768" 
+    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True" xmlns:my="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI" xmlns:my1="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps">
+	<phone:PhoneApplicationPage.Resources>
+		<Style x:Key="markButton" TargetType="Button">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid x:Name="markButton">
+							<Ellipse Stroke="#FFB61919" Fill="#FFDC4242" StrokeThickness="10" Stretch="Uniform"/>
+                            <TextBox Margin="17,79,17,79" TextWrapping="Wrap" Text="ОТМЕТИТЬ" d:LayoutOverrides="Height" FontFamily="Trebuchet MS" TextAlignment="Center" FontSize="32" FontWeight="Bold" Visibility="Collapsed" />
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="ОТМЕТИТЬ"/>
+                        </Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</phone:PhoneApplicationPage.Resources>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--Pivot Control-->
+        <controls:Pivot Name="MaintPivot" Title="АВТО ПОИСК">
+            <!--Pivot item one-->
+            <controls:PivotItem Header="отметить" Name="Mark" Margin="0,28,0,0">
+            	<Grid Margin="0">
+            		<Button Content="Button" Margin="113,84,113,293" Style="{StaticResource markButton}" Click="Button_Click" Width="230" Height="230" />
+            		<Button Content="?" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="67" Click="infoButton_Click" />
+                    <my:AdControl AdUnitId="10713041" ApplicationId="c8c4103a-cdf9-4196-9e3b-6b3413b5df97" Height="80" HorizontalAlignment="Left" Margin="0,462,0,0" Name="adControl1" VerticalAlignment="Top" Width="480" Visibility="Visible" />
+                    <!--adduplex:AdControl xmlns:adduplex="clr-namespace:AdDuplex;assembly=AdDuplex.AdControl.Silverlight"
+                       Grid.Row="2"
+                                        Margin="0,395,0,0"
+                       AppId="5c6acf83-2d48-41dd-9120-a272065b69a1" 
+                       /-->
+                    <Button Content="Отправить координаты" Height="72" Margin="1,531,237,0" Name="sendLocationButton" VerticalAlignment="Top" Click="sendLocationButton_Click" FontSize="17.333" Width="242" />
+                    <Button Content="Ввести координаты" Height="72" HorizontalAlignment="Left" Margin="225,531,0,0" Name="enterLocationButton" VerticalAlignment="Top" Width="210" Click="enterLocationButton_Click" FontSize="17.333" />
+
+                    <StackPanel Name="LocationEnterPanel" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
+
+                        <TextBlock Text="Введите СМС с координатами внизу" HorizontalAlignment="Center" />
+                        <TextBox Height="71" Name="enterLocationTextBox" Text="" Width="460" InputScope="Formula" />
+                        <Grid>
+                            <Button Content="OK" Height="71" Name="submitLocationButton" Width="160" Margin="49,-3,251,3" Click="submitLocationButton_Click" />
+                            <Button Content="Cancel" Height="71" Name="cancelLocationBox" Width="160" Margin="266,-1,34,1" Click="cancelLocationBox_Click" />
+                        </Grid>
+                    </StackPanel>
+                    <Button Content="Сохранить координаты" HorizontalAlignment="Left" VerticalAlignment="Top" Click="saveLocationButton_Click" />
+                </Grid>
+                <!--Double line list with text wrapping-->
+            </controls:PivotItem>
+ 
+            <!--Pivot item two-->
+            <controls:PivotItem Header="искать" Name="Navigation" Margin="0,28,0,0">
+            	<Grid>
+            		<!--Grid Width="198" HorizontalAlignment="Left" Margin="0,0,0,8" Height="208" VerticalAlignment="Bottom" Visibility="Collapsed"> 
+            		<Polygon Points="100,0 75,75 100,100 125,75"
+                      Stroke="Black" StrokeThickness="2" Fill="Yellow"/>
+	                  <Polygon Points="100,100 125,125 100,200 75,125"
+                      Stroke="Yellow" StrokeThickness="2" Fill="#FF992121"/>
+                 <Polygon Points="100,100 125,75 200,100 125,125"
+                      Stroke="Red" StrokeThickness="2" Fill="Blue"/>
+                 <Polygon Points="100,100 75,125 0,100 75,75"
+                      Stroke="Blue" StrokeThickness="2" Fill="Red" Visibility="Visible" />
+	                  </Grid-->
+	                  <Canvas RenderTransformOrigin="0.5,1" x:Name="Triangle" Canvas.Left="0" Canvas.Top="0" Margin="162,127,162,0" Height="174" VerticalAlignment="Top">
+                        <my1:Map CredentialsProvider="AtQNn4zwMswl5jqyKlzE4wkoGKyPQP4U5efDNVSxPm3k2JAnbEw3Zd-Y3Y72j3Lg"  RenderTransformOrigin="0.5,0.5" Height="1029" HorizontalAlignment="Left" Name="map1" VerticalAlignment="Top" Width="1069" Canvas.Left="-456" Canvas.Top="-338" Visibility="Collapsed" />
+ 
+                        <!--Path x:Name="Path" Width="82" Height="137.863" Canvas.Top="84.137" Stretch="Fill" StrokeThickness="11" StrokeLineJoin="Round" Stroke="#FF6DA14A" Fill="#FF64FF00" Data="F1 M 102.018,5.49997L 5.5,172.674L 198.536,172.674L 102.018,5.49997 Z " UseLayoutRounding="False" Canvas.Left="38" d:IsHidden="True" Visibility="Collapsed" /-->
+	                  	<!--Ellipse Fill="#FF758960" Height="60" Canvas.Left="48" Stroke="#FF4E504E" StrokeThickness="0" StrokeLineJoin="Round" Canvas.Top="145" Width="60" Visibility="Collapsed" /-->
+	                  	<!--Ellipse Fill="#FF2B2D29" Height="16" Canvas.Left="70" Stroke="#FF111211" StrokeThickness="0" StrokeLineJoin="Round" Canvas.Top="167" Width="16"/-->
+
+
+                        <Rectangle Fill="#FF64FF00" Height="106" Canvas.Left="65" Stroke="#FF6DA14A" StrokeThickness="6" StrokeLineJoin="Round" Canvas.Top="220" Width="28"/>
+                        <Path Data="F1 M 102.018,5.49997L 5.5,172.674L 198.536,172.674L 102.018,5.49997 Z" Fill="#FF64FF00" Height="51.694" Canvas.Left="50.431" Stretch="Fill" Stroke="#FF6DA14A" StrokeThickness="10" Canvas.Top="174.338" UseLayoutRounding="False" Width="57.173"/>
+                        <Ellipse RenderTransformOrigin="0.5,0.5" x:Name="targetEllipse" Fill="#FFDC4242" Stroke="#FFB61919" StrokeThickness="10" Height="64" Canvas.Left="46" Canvas.Top="-62" Width="64" d:LayoutOverrides="VerticalAlignment, Height">
+                            <Ellipse.RenderTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+
+                        <Line Name="pathLine" StrokeStartLineCap="Triangle" X1="78" Y1="-30" X2="78" Y2="204" StrokeDashArray="2 2" Stroke="#FFB61919" StrokeThickness="10" Height="174" Width="158"/>
+
+                    </Canvas>
+                    <Rectangle Name="upperMapRect" Height="222" Stroke="Black" VerticalAlignment="Top" Margin="0,-162,0,0" Fill="{StaticResource PhoneBackgroundBrush}" StrokeThickness="0"/>
+                    <Button Content="Скрыть карту" Height="116" HorizontalAlignment="Center" Margin="0,-134,0,0" Name="hideMapButton" VerticalAlignment="Top" Width="260" Click="hideMapButton_Click" Visibility="Collapsed" Background="#DAFA723A" />
+                    <Button Content="Показать карту" Height="116" HorizontalAlignment="Center" Margin="0,-134,0,0" Name="showMapButton" VerticalAlignment="Top" Width="260" Click="showMapButton_Click" Visibility="Visible" Background="#DA79D179" />
+
+                    <Button Content="Удалить цель" Height="72" HorizontalAlignment="Left" Margin="0,-2,0,0" Name="resetButton" VerticalAlignment="Top" Width="230" Click="resetButton_Click" d:LayoutOverrides="VerticalAlignment" />
+                    <TextBlock Height="30" HorizontalAlignment="Center" Text="Расстояние: " VerticalAlignment="Top" FontWeight="Bold" Margin="245,10,113,0" />
+                    <TextBlock Height="30" HorizontalAlignment="Center" Name="distanceTextBox" Text="0" VerticalAlignment="Top" FontWeight="Bold" Margin="354,34,5,0" Width="121" />
+                    <Rectangle Name="bottomMapRect" Fill="{StaticResource PhoneBackgroundBrush}" Height="80" Stroke="Black" VerticalAlignment="Bottom" Visibility="Collapsed"  StrokeThickness="0"/>
+                    
+
+                    <!--Calibration UI-->
+                    <StackPanel Name="calibrationStackPanel" Background="{StaticResource PhoneBackgroundBrush}" Opacity="1" Visibility="Collapsed">
+                        <Image Source="Images/calibrate_compass.png" Opacity=".95" HorizontalAlignment="Center" Visibility="Visible" />
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                            Компас на вашем устройстве нужно откалибровать. Держите телефон перед собой и проведите по траектории в виде цифры 8, как показано на рисунке, пока колибровка не будет закончена.
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" Margin="0,10" HorizontalAlignment="Center">
+                            <TextBlock>Точность:</TextBlock>
+                            <TextBlock Name="calibrationTextBlock">0.0°</TextBlock>
+                        </StackPanel>
+                        <Button Name="calibrationButton" Content="Закончить" Click="calibrationButton_Click"></Button>
+                    </StackPanel>
+                    <my:AdControl AdUnitId="10713041" ApplicationId="c8c4103a-cdf9-4196-9e3b-6b3413b5df97" Height="80" HorizontalAlignment="Left" Margin="0,527,0,0" Name="adControl2" VerticalAlignment="Top" Width="480" Visibility="Visible" />
+                   
+                    <!--google:BannerAd
+                         VerticalAlignment="Bottom"
+                            xmlns:google="clr-namespace:Google.AdMob.Ads.WindowsPhone7.WPF;assembly=Google.AdMob.Ads.WindowsPhone7"
+                            AdUnitID="a14fc3ad3886545"/-->
+                    <!--Image VerticalAlignment="Bottom" Source="Images/mega-poisk-wp7.jpg" Tap="Image_Tap"/-->
+                    <!--End Calibration UI-->
+                </Grid> 
+                <!--Triple line list no text wrapping-->
+            </controls:PivotItem>
+            <controls:PivotItem x:Name="History" Header="история" Margin="0,28,0,0">
+                <Grid>
+                <ListBox x:Name="FirstListBox" ItemsSource="{Binding}" Margin="10,0,10,80" Background="#da79D179" Tap="FirstListBox_Tap" Height="529">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,0,0,17" Width="432" Height="78">
+                                <TextBlock Text="{Binding FirstLine}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding SecondLine}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                    <toolkit:ContextMenuService.ContextMenu>
+                                        <toolkit:ContextMenu>
+                                            <toolkit:MenuItem Tag="{Binding}" Header="Переименовать" Click="renamePlacemark_Click"/>
+                                        </toolkit:ContextMenu>
+                                    </toolkit:ContextMenuService.ContextMenu>
+                                </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel Background="{StaticResource PhoneBackgroundBrush}" Name="PlacemarkNameEnterPanel" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
+
+                    <TextBlock Text="Введите новое название для места" HorizontalAlignment="Center" />
+                    <TextBox Height="71" Name="enterPlacemarkNameTextBox" Text="" Width="460" InputScope="Formula" />
+                    <Grid>
+                        <Button Content="Сохранить" Height="71" Name="submitPlacemarkNameButton" Width="180" Margin="49,-3,238,3" Click="submitPlacemarkNameButton_Click" />
+                        <Button Content="Отмена" Height="71" Name="cancelPlacemarkNameBox" Width="160" Margin="266,-1,34,1" Click="cancelPlacemarkNameBox_Click" />
+                    </Grid>
+                </StackPanel>
+                    <adduplex:AdControl xmlns:adduplex="clr-namespace:AdDuplex;assembly=AdDuplex.AdControl.Silverlight"
+                       Grid.Row="2" 
+                       VerticalAlignment="Bottom"
+                       AppId="5c6acf83-2d48-41dd-9120-a272065b69a1" 
+                       />
+                </Grid>
+
+            </controls:PivotItem>
+        </controls:Pivot>
+        <StackPanel Name="LoadingPanel" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"> 
+            <toolkit:PerformanceProgressBar x:Name="performanceProgressBarCustomized" IsIndeterminate="True"  Width="450" Margin="10" />
+            <TextBlock Text="Поиск спутников..." HorizontalAlignment="Center" /> 
+		</StackPanel>
+        <!--google:BannerAd
+                         Margin="0,700,0,0"
+            xmlns:google="clr-namespace:Google.AdMob.Ads.WindowsPhone7.WPF;assembly=Google.AdMob.Ads.WindowsPhone7"
+            AdUnitID="a14fc3ad3886545"/-->
+    </Grid>
+ 
+    <!--Sample code showing usage of ApplicationBar-->
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+</phone:PhoneApplicationPage>
